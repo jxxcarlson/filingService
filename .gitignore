@@ -1,0 +1,11 @@
+.stack-work/
+*~
+pdfFiles/*.*
+texFiles/*.*
+texFiles/.DS_Store
+.DS_Store
+image/*.*
+app/Main
+app/Main.o
+app/Main.hi
+

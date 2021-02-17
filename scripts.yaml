@@ -1,0 +1,16 @@
+scripts:
+  
+  exec: stack exec filingService-exe
+
+  cloc: cloc --by-file src app
+
+  ssh: ssh root@161.35.125.40
+
+  ping: ping 161.35.125.40
+
+  test-server: curl http://161.35.125.40/hello
+
+  test-server2: curl https://shoobox.io/hello
+
+  test-server3: curl -X POST https://shoobox.io/hello
+
