@@ -1,4 +1,4 @@
-# SFF: Simple Filing Service
+# filingService
 
 Send a POST request to `localhost://8077/save` with body a JSON object with text fields 
 `fileName` and `content`.  The file in question will be saved in the folder `./data`.
