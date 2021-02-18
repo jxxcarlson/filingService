@@ -11,6 +11,6 @@ or in some other controlled environment.
 
 Send a GET request to `localhost://8077/hello` to see if the server is alive. 
 
-Written in Haskell, 52 lines of code.
+Written in Haskell, 58 lines of code.
 
 run with `stack ghci`.
