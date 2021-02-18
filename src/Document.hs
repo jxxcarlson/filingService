@@ -4,15 +4,20 @@ module Document (Document, write) where
 import Data.Text.Lazy ( unpack, Text )
 import Data.Text.Lazy.Encoding
 import Data.Aeson
+    ( (.:),
+      object,
+      FromJSON(parseJSON),
+      Value(Object),
+      KeyValue((.=)),
+      ToJSON(toJSON) )
+import System.Directory (createDirectoryIfMissing)
+import System.FilePath.Posix (takeDirectory)      
 import Control.Applicative
-import System.Process
-import Data.List.Split
 
--- Define the Article constructor
--- e.g. Article 12 "some title" "some body text"
+-- The Document type
+
 data Document = Document Text Text  -- fileName content
      deriving (Show)
-
 
 fileName :: Document -> Text
 fileName (Document fileName _) = fileName
@@ -20,21 +25,26 @@ fileName (Document fileName _) = fileName
 content :: Document -> Text
 content (Document _ content) = content
 
--- Tell Aeson how to create a Document object from JSON string.
+
+-- Document: to and from JSON
+
 instance FromJSON Document where
      parseJSON (Object v) = Document <$>
                             v .: "fileName" <*> 
                             v .:  "content" 
 
-
--- Tell Aeson how to convert a Document object to a JSON string.
 instance ToJSON Document where
      toJSON (Document fileName content) =
          object ["fileName" .= fileName,  "content" .= content]
 
 
+-- Writing a documennt to disk
+
 write :: Document -> IO()
 write doc = 
-    writeFile ("data/" ++ (unpack $ (fileName doc))) (unpack $ content doc)
+    createAndWriteFile ("data/" ++ (unpack $ (fileName doc))) (unpack $ content doc)
 
-
+createAndWriteFile :: FilePath -> String -> IO ()
+createAndWriteFile path content = do
+  createDirectoryIfMissing True $ takeDirectory path
+  writeFile path content

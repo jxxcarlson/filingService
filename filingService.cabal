@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0c55e16749354d7288a0a59dd1edde5a1f96bc58812566f87b09bf5ad6ad8fa5
+-- hash: a03f9caed67b743af8d8e70d8ae5a31324c6ee2c6689ab947c83b0056e3756a6
 
 name:           filingService
 version:        0.1.0.0
@@ -33,15 +33,15 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
-    , process >=1.6.1.0
-    , raw-strings-qq  >=1.1
-    , MissingH >=1.4.0.1
-    , text >=1.2.4.0
-    , aeson >=1.4.7.1
-    , split >=0.2.3.4
-
-
+      aeson
+    , base >=4.7 && <5
+    , directory
+    , filepath
+    , scotty
+    , text
+    , wai-cors
+    , wai-extra
+    , wai-middleware-static
   default-language: Haskell2010
 
 executable filingService-exe
@@ -52,18 +52,16 @@ executable filingService-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
+    , directory
+    , filepath
     , filingService
     , scotty
-    , http-types
-    , wai-middleware-static >=0.8.3
-    , text >=1.2.4.0
-    , wai-cors >=0.2.7
-    , process >=1.6.1.0
-    , wai-extra >=3.0.32
-
- 
-
+    , text
+    , wai-cors
+    , wai-extra
+    , wai-middleware-static
   default-language: Haskell2010
 
 test-suite filingService-test
@@ -75,6 +73,14 @@ test-suite filingService-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
+    , directory
+    , filepath
     , filingService
+    , scotty
+    , text
+    , wai-cors
+    , wai-extra
+    , wai-middleware-static
   default-language: Haskell2010
